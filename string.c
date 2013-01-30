@@ -3531,7 +3531,7 @@ rb_str_aset(VALUE str, VALUE indx, VALUE val)
  *  <code>Fixnum</code> will raise an <code>IndexError</code> if the value is
  *  out of range; the <code>Range</code> form will raise a
  *  <code>RangeError</code>, and the <code>Regexp</code> and <code>String</code>
- *  forms will silently ignore the assignment.
+ *  will raise an <code>IndexError</code> on negative match.
  */
 
 static VALUE
@@ -3792,7 +3792,7 @@ rb_str_sub_bang(int argc, VALUE *argv, VALUE str)
  *  The result inherits any tainting in the original string or any supplied
  *  replacement string.
  *
- *     "hello".sub(/[aeiou]/, '*')                  #=> "h*llo"
+ *     "hello".sub(/[aeioux]/, '*')                  #=> "h*llo"
  *     "hello".sub(/([aeiou])/, '<\1>')             #=> "h<e>llo"
  *     "hello".sub(/./) {|s| s.ord.to_s + ' ' }     #=> "104 ello"
  *     "hello".sub(/(?<foo>[aeiou])/, '*\k<foo>*')  #=> "h*e*llo"
